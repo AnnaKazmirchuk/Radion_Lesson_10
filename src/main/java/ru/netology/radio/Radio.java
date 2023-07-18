@@ -42,15 +42,18 @@ public class Radio {
 
     public int getCurrentVolume() {
         return currentVolume;
+
     }
+
 
     public void setCurrentVolume(int newVolume) {
         if (newVolume < minVolume) {
-            return;
+            newVolume = minVolume;
         }
         if (newVolume > maxVolume) {
-            return;
+            newVolume = maxVolume;
         }
+
         currentVolume = newVolume;
     }
 
@@ -64,7 +67,6 @@ public class Radio {
         if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
         }
+
     }
-
-
 }
