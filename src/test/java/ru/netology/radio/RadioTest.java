@@ -88,6 +88,18 @@ public class RadioTest {
     }
 
     @Test
+    public void shouldChooseVolume() {
+        Radio radio = new Radio();
+        radio.setCurrentVolume(50);
+        int expected = 50;
+        int actual = radio.getCurrentVolume();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
     public void shouldIncreaseVolume() {
         Radio radio = new Radio();
         radio.setCurrentVolume(20);
@@ -111,18 +123,20 @@ public class RadioTest {
 
     }
 
-    public void shouldNotIncreaseVolumeAboveMax() {
+    @Test
+    public void shouldNotSetVolumeAboveMax() {
         Radio radio = new Radio();
+        radio.setCurrentVolume(50);
         radio.setCurrentVolume(101);
-        radio.increaseVolume();
-        int expected = 100;
+        int expected = 50;
         int actual = radio.getCurrentVolume();
 
         Assertions.assertEquals(expected, actual);
 
     }
 
-    public void shouldNotSetVolumeAboveMax() {
+    @Test
+    public void shouldNotIncreaseVolumeAboveMax() {
         Radio radio = new Radio();
         radio.setCurrentVolume(100);
         radio.increaseVolume();
@@ -133,19 +147,8 @@ public class RadioTest {
 
     }
 
-
+    @Test
     public void shouldNotDecreaseVolumeBelowMin() {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(-1);
-        radio.decreaseVolume();
-        int expected = 0;
-        int actual = radio.getCurrentVolume();
-
-        Assertions.assertEquals(expected, actual);
-
-    }
-
-    public void shouldNotSetVolumeBelowMin() {
         Radio radio = new Radio();
         radio.setCurrentVolume(0);
         radio.decreaseVolume();
@@ -156,16 +159,18 @@ public class RadioTest {
 
     }
 
-
-    public void shouldChooseVolume() {
+    @Test
+    public void shouldNotSetVolumeBelowMin() {
         Radio radio = new Radio();
         radio.setCurrentVolume(50);
+        radio.setCurrentVolume(-1);
         int expected = 50;
         int actual = radio.getCurrentVolume();
 
         Assertions.assertEquals(expected, actual);
 
     }
+
 
 
 }
