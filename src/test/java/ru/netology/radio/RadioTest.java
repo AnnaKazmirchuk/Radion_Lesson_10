@@ -55,6 +55,19 @@ public class RadioTest {
     }
 
     @Test
+    public void nextRadioStationAfterMaxLimit() {
+        Radio radio = new Radio(30);
+        radio.setCurrentRadioStation(29);
+        radio.nextRadioStation();
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
     public void chooseRadioStation() {
         Radio radio = new Radio();
         radio.setCurrentRadioStation(4);
@@ -77,10 +90,34 @@ public class RadioTest {
     }
 
     @Test
+    public void shouldNotSetRadioStationBelowLimit() {
+        Radio radio = new Radio(30);
+        radio.setCurrentRadioStation(0);
+        radio.prevRadioStation();
+        int expected = 29;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
     public void shouldNotSetRadioStationAboveMax() {
         Radio radio = new Radio();
         radio.setCurrentRadioStation(10);
         int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldNotSetRadioStationAboveMaxLimit() {
+        Radio radio = new Radio(30);
+        radio.setCurrentRadioStation(10);
+        radio.setCurrentRadioStation(30);
+        int expected = 10;
         int actual = radio.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
